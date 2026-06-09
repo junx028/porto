@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veldora - Backend Developer | AI-Powered</title>
+    
+    <meta name="description" content="Veldora - Backend Developer yang mengandalkan AI untuk membangun project scalable. Spesialis Telegram Bot & Panel Management.">
+    <meta property="og:title" content="Veldora - Backend Developer">
+    <meta property="og:description" content="Backend Developer | AI-Powered | Telegram Bot Specialist">
+    <meta property="og:image" content="https://files.catbox.moe/sf4i2z.jpg">
+    <meta property="og:type" content="profile">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6c63ff;
+            --secondary: #e94560;
+            --accent: #0ff;
+            --dark: #0a0a0a;
+            --card-bg: rgba(20, 20, 40, 0.85);
+            --text-primary: rgba(255, 255, 255, 0.95);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.5);
+            --border: rgba(255, 255, 255, 0.1);
+            --glow: rgba(108, 99, 255, 0.3);
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 30%, #16213e 60%, #0f3460 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            color: var(--text-primary);
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(108, 99, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(108, 99, 255, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(60px, 60px); }
+        }
+
+        .code-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .code-particle {
+            position: absolute;
+            color: rgba(108, 99, 255, 0.3);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            animation: codeFloat 15s infinite ease-in-out;
+            white-space: nowrap;
+        }
+
+        @keyframes codeFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            50% { transform: translateY(-150px) translateX(100px); opacity: 0.5; }
+            90% { opacity: 1; }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 
+                        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+                        0 0 80px var(--glow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: cardGlow 3s ease-in-out infinite alternate;
+            width: 100%;
+            max-width: 650px;
+        }
+
+        @keyframes cardGlow {
+            0% { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(108, 99, 255, 0.3); }
+            100% { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 80px rgba(233, 69, 96, 0.4); }
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 
+                        0 0 100px rgba(108, 99, 255, 0.4);
+        }
+
+        .profile-header {
+            position: relative;
+            padding: 60px 40px 40px;
+            background: linear-gradient(180deg, 
+                rgba(108, 99, 255, 0.1) 0%, 
+                rgba(233, 69, 96, 0.05) 50%,
+                transparent 100%);
+        }
+
+        .profile-photo-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 30px;
+        }
+
+        .photo-outer-ring {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 184px;
+            height: 184px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--primary);
+            border-right-color: var(--secondary);
+            border-bottom-color: var(--accent);
+            border-left-color: #ff6b6b;
+            animation: ringSpin 4s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(108, 99, 255, 0.5));
+        }
+
+        @keyframes ringSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .photo-inner-ring {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 172px;
+            height: 172px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            animation: innerGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes innerGlow {
+            0% { box-shadow: 0 0 20px rgba(108, 99, 255, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(233, 69, 96, 0.5); }
+        }
+
+        .profile-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4),
+                        0 0 30px rgba(108, 99, 255, 0.3) inset;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5),
+                        0 0 50px rgba(108, 99, 255, 0.5) inset;
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo:hover img {
+            transform: scale(1.1);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #6c63ff, #e94560);
+            font-size: 70px;
+            color: white;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #0ff, #6c63ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 3px solid rgba(20, 20, 40, 0.8);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5);
+            z-index: 2;
+            animation: verifiedPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes verifiedPulse {
+            0%, 100% { box-shadow: 0 5px 15px rgba(0, 255, 255, 0.5); }
+            50% { box-shadow: 0 5px 25px rgba(0, 255, 255, 0.8); }
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .profile-name {
+            font-size: 2.2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6c63ff, #e94560, #0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            color: var(--text-secondary);
+            font-size: 1em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(108, 99, 255, 0.15);
+            border: 1px solid rgba(108, 99, 255, 0.4);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: var(--primary);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .role-icon {
+            font-size: 1.2em;
+        }
+
+        .profile-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid rgba(0, 255, 0, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: #0f0;
+            font-size: 0.85em;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #0f0;
+            border-radius: 50%;
+            animation: statusBlink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes statusBlink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tech-pill {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.8em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .tech-pill:hover {
+            background: rgba(108, 99, 255, 0.2);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #6c63ff, #e94560, #0ff);
+            margin: 20px auto;
+            border-radius: 3px;
+        }
+
+        .content-section {
+            padding: 30px 40px 40px;
+        }
+
+        .description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 25px;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        .ai-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .ai-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85em;
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .ai-badge:hover::before {
+            left: 100%;
+        }
+
+        .ai-badge:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .ai-badge:active {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        .badge-icon {
+            font-size: 1.3em;
+        }
+
+        .project-section {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-title {
+            color: var(--accent);
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .bot-info {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 15px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .bot-username {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.1em;
+            background: rgba(108, 99, 255, 0.1);
+            padding: 12px 25px;
+            border-radius: 12px;
+            display: inline-block;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: all;
+            border: 1px solid rgba(108, 99, 255, 0.3);
+        }
+
+        .bot-username:hover {
+            background: rgba(108, 99, 255, 0.25);
+            box-shadow: 0 0 25px rgba(108, 99, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #6c63ff, #e94560);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+            animation: btnGlow 2s ease-in-out infinite alternate;
+            letter-spacing: 1px;
+        }
+
+        @keyframes btnGlow {
+            0% { box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3); }
+            100% { box-shadow: 0 10px 50px rgba(233, 69, 96, 0.6); }
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(108, 99, 255, 0.5);
+        }
+
+        .contact-btn:active {
+            transform: scale(0.95);
+            transition: transform 0.1s;
+        }
+
+        .hosting-badge {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.85em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 0, 0, 0.95);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            z-index: 1000;
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            font-size: 0.9em;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-card {
+                border-radius: 20px;
+            }
+            
+            .profile-header {
+                padding: 40px 20px 30px;
+            }
+            
+            .content-section {
+                padding: 20px 20px 30px;
+            }
+            
+            .profile-name {
+                font-size: 1.8em;
+            }
+            
+            .profile-photo-container {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .profile-photo {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .photo-outer-ring {
+                width: 154px;
+                height: 154px;
+                top: -12px;
+                left: -12px;
+            }
+            
+            .photo-inner-ring {
+                width: 142px;
+                height: 142px;
+                top: -6px;
+                left: -6px;
+            }
+            
+            .tech-stack {
+                gap: 8px;
+                padding: 15px;
+            }
+            
+            .tech-pill {
+                padding: 6px 12px;
+                font-size: 0.7em;
+            }
+            
+            .ai-badges {
+                gap: 8px;
+            }
+            
+            .ai-badge {
+                padding: 8px 12px;
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="code-particles" id="codeParticles"></div>
+    <div class="toast" id="toast"></div>
+
+    <div class="container">
+        <div class="portfolio-card">
+            <div class="profile-header">
+                <div class="profile-photo-container">
+                    <div class="photo-outer-ring"></div>
+                    <div class="photo-inner-ring"></div>
+                    <div class="profile-photo" id="profilePhoto" onclick="changePhoto()" title="Klik untuk ganti foto!">
+                        <img id="profileImage" 
+                             src="https://files.catbox.moe/sf4i2z.jpg"
+                             alt="Veldora - Backend Developer"
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Cdefs%3E%3ClinearGradient id=%22grad%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22%3E%3Cstop offset=%220%25%22 style=%22stop-color:%236c63ff;stop-opacity:1%22 /%3E%3Cstop offset=%22100%25%22 style=%22stop-color:%23e94560;stop-opacity:1%22 /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%22200%22 height=%22200%22 fill=%22url(%23grad)%22/%3E%3Ctext x=%22100%22 y=%22110%22 font-size=%2280%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22%3E⚙️%3C/text%3E%3C/svg%3E';">
+                    </div>
+                    <div class="verified-badge">✓</div>
+                </div>
+
+                <div class="profile-info">
+                    <h1 class="profile-name">Veldora</h1>
+                    <p class="profile-title">⚡ AI-Powered Developer ⚡</p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                        <span class="profile-role">
+                            <span class="role-icon">⚙️</span> Backend Developer
+                        </span>
+                        <span class="profile-status">
+                            <span class="status-dot"></span>
+                            Available for Projects
+                        </span>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-pill">🐍 Python</span>
+                    <span class="tech-pill">📦 Node.js</span>
+                    <span class="tech-pill">🗄️ MongoDB</span>
+                    <span class="tech-pill">🐘 PostgreSQL</span>
+                    <span class="tech-pill">🔴 Redis</span>
+                    <span class="tech-pill">🐳 Docker</span>
+                    <span class="tech-pill">☁️ VPS</span>
+                    <span class="tech-pill">🔧 REST API</span>
+                    <span class="tech-pill">🤖 Telegram Bot</span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="content-section">
+                <p class="description" id="typing-text"></p>
+                <span class="cursor" style="display: inline-block; width: 3px; height: 1.2em; background: #0ff; margin-left: 2px; animation: blink 0.8s infinite; vertical-align: text-bottom;"></span>
+
+                <div class="ai-badges" style="margin-top: 25px;">
+                    <div class="ai-badge" onclick="showToast('🧠 Claude - Primary Backend Assistant')">
+                        <span class="badge-icon">🧠</span> Claude
+                    </div>
+                    <div class="ai-badge" onclick="showToast('🤖 GPT - API & Logic Generation')">
+                        <span class="badge-icon">🤖</span> ChatGPT
+                    </div>
+                    <div class="ai-badge" onclick="showToast('🔍 DeepSeek - Database Optimization')">
+                        <span class="badge-icon">🔍</span> DeepSeek
+                    </div>
+                    <div class="ai-badge" onclick="showToast('💎 Gemini - Architecture Design')">
+                        <span class="badge-icon">💎</span> Gemini
+                    </div>
+                </div>
+
+                <div class="project-section">
+                    <p class="project-title">🚀 Telegram Mini App Bot</p>
+                    <p style="color: rgba(255,255,255,0.8); margin-bottom: 15px; text-align: center;">
+                        Bot Install Panel — Free & Premium
+                    </p>
+                    <div class="bot-info">
+                        <p style="color: rgba(255,255,255,0.7); margin-bottom: 8px; text-align: center;">🤖 Bot Username:</p>
+                        <div style="text-align: center;">
+                            <span class="bot-username" onclick="copyToClipboard('@freeupgradepanel_bot')" title="Klik untuk copy!">
+                                @freeupgradepanel_bot
+                            </span>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.5); font-size: 0.85em; margin-top: 12px; text-align: center;">
+                            ✨ Include Free Panel Installation
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 25px;">
+                    <p style="color: rgba(255,255,255,0.7); margin-bottom: 10px;">
+                        📩 Contact Developer:
+                    </p>
+                    <span class="bot-username" onclick="copyToClipboard('@Vyeldora')" title="Klik untuk copy!">
+                        @Vyeldora
+                    </span>
+                    <br>
+                    <a href="https://t.me/Vyeldora" target="_blank" rel="noopener" class="contact-btn">
+                        💬 Chat on Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="hosting-badge">
+            🚀 Deployed on Vercel / Netlify — Free Forever!
+        </div>
+
+        <p style="color: rgba(255,255,255,0.4); margin-top: 30px; font-size: 0.8em; text-align: center;">
+            © 2024 Veldora • Backend Developer • Built with AI 🤖✨
+        </p>
+    </div>
+
+    <script>
+        const CONFIG = {
+            profilePhotoURL: 'https://files.catbox.moe/sf4i2z.jpg',
+            fallbackEmoji: '⚙️',
+            name: 'Veldora',
+            role: 'Backend Developer',
+            botUsername: '@freeupgradepanel_bot',
+            contactUsername: '@Vyeldora',
+            telegramURL: 'https://t.me/Vyeldora'
+        };
+
+        function createCodeParticles() {
+            const container = document.getElementById('codeParticles');
+            const codeSnippets = [
+                'async', 'await', 'def', 'class', 'import', 'from', 'try', 'except',
+                'return', 'yield', 'lambda', 'self', 'init', 'api', 'json',
+                'const', 'let', 'var', 'function', '=>', 'export', 'require',
+                'SELECT', 'INSERT', 'UPDATE', 'DELETE', 'JOIN', 'GROUP BY',
+                'docker', 'nginx', 'redis', 'mongodb', 'postgres', 'pm2'
+            ];
+            
+            for (let i = 0; i < 30; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('code-particle');
+                
+                particle.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+                particle.style.fontSize = Math.random() * 10 + 10 + 'px';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        function typeWriter() {
+            const text = `Backend Developer yang memanfaatkan AI (Claude, GPT, DeepSeek, Gemini) untuk membangun API, database, dan sistem backend yang scalable. Spesialis Telegram Bot Development & VPS Panel Management. Semua project dibangun dengan arsitektur yang clean dan efisien! 🚀`;
+            const typingElement = document.getElementById('typing-text');
+            let index = 0;
+            
+            function type() {
+                if (index < text.length) {
+                    typingElement.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, 25 + Math.random() * 15);
+                }
+            }
+            
+            type();
+        }
+
+        function changePhoto() {
+            const img = document.getElementById('profileImage');
+            const newURL = prompt('📸 Masukkan URL foto profil baru:\n\nContoh:\nhttps://files.catbox.moe/xxxxx.jpg\n\nUpload dulu ke:\n• Catbox: https://catbox.moe/\n• ImgBB: https://imgbb.com/', CONFIG.profilePhotoURL);
+            
+            if (newURL && newURL.trim()) {
+                img.src = newURL.trim();
+                CONFIG.profilePhotoURL = newURL.trim();
+                localStorage.setItem('veldora_photo_url', newURL.trim());
+                showToast('✅ Foto profil berhasil diupdate!');
+            } else if (newURL !== null) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                
+                input.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (file) {
+                        showToast('⏳ Upload ke Catbox...');
+                        
+                        const formData = new FormData();
+                        formData.append('fileToUpload', file);
+                        formData.append('reqtype', 'fileupload');
+                        
+                        fetch('https://catbox.moe/user/api.php', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.text())
+                        .then(url => {
+                            if (url && url.startsWith('http')) {
+                                img.src = url;
+                                CONFIG.profilePhotoURL = url;
+                                localStorage.setItem('veldora_photo_url', url);
+                                showToast('✅ Foto berhasil diupload ke Catbox!');
+                            } else {
+                                throw new Error('Upload failed');
+                            }
+                        })
+                        .catch(() => {
+                            const reader = new FileReader();
+                            reader.onload = function(event) {
+                                img.src = event.target.result;
+                                showToast('⚠️ Gagal upload, menggunakan local preview');
+                            };
+                            reader.readAsDataURL(file);
+                        });
+                    }
+                };
+                
+                input.click();
+            }
+        }
+
+        function loadSavedPhoto() {
+            const savedURL = localStorage.getItem('veldora_photo_url');
+            if (savedURL) {
+                const img = document.getElementById('profileImage');
+                img.src = savedURL;
+                CONFIG.profilePhotoURL = savedURL;
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            
+            clearTimeout(toast.timeout);
+            toast.timeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('✅ Copied: ' + text);
+                    animateCopyFeedback(text);
+                });
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                textarea.style.opacity = '0';
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('✅ Copied: ' + text);
+                animateCopyFeedback(text);
+            }
+        }
+
+        function animateCopyFeedback(text) {
+            const elements = document.querySelectorAll('.bot-username');
+            elements.forEach(el => {
+                if (el.textContent.trim() === text) {
+                    el.style.background = 'rgba(0,255,255,0.3)';
+                    el.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        el.style.background = 'rgba(108,99,255,0.1)';
+                        el.style.transform = 'scale(1)';
+                    }, 300);
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.key === 'b') {
+                e.preventDefault();
+                copyToClipboard(CONFIG.botUsername);
+            }
+            if (e.ctrlKey && e.key === 'v') {
+                e.preventDefault();
+                copyToClipboard(CONFIG.contactUsername);
+            }
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                changePhoto();
+            }
+        });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            createCodeParticles();
+            typeWriter();
+            loadSavedPhoto();
+            
+            setTimeout(() => {
+                showToast('🖱️ Klik foto untuk ganti | Ctrl+B copy bot | Ctrl+V copy contact');
+            }, 2000);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            const card = document.querySelector('.portfolio-card');
+            if (card && window.innerWidth > 768) {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            }
+        });
+
+        document.querySelector('.portfolio-card')?.addEventListener('mouseleave', function() {
+            this.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        });
+    </script>
+</body>
+</html>
